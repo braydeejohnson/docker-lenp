@@ -33,7 +33,7 @@ RUN mkdir -p /data && \
 RUN sed -i "s/;date.timezone =.*/date.timezone = UTC/" /etc/php/7.1/fpm/php.ini && \
     sed -i "s/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/" /etc/php/7.1/fpm/php.ini && \
     sed -i "s/display_errors = Off/display_errors = stderr/" /etc/php/7.1/fpm/php.ini && \
-    sed -i "s/upload_max_filesize = 2M/upload_max_filesize = 30M/" /etc/php/7.1/fpm/php.ini && \
+    sed -i "s/upload_max_filesize = 2M/upload_max_filesize = 100M/" /etc/php/7.1/fpm/php.ini && \
     sed -i "s/;opcache.enable=0/opcache.enable=0/" /etc/php/7.1/fpm/php.ini && \
     sed -i -e "s/;daemonize\s*=\s*yes/daemonize = no/g" /etc/php/7.1/fpm/php-fpm.conf && \
     sed -i "/listen = .*/c\listen = [::]:9000" /etc/php/7.1/fpm/pool.d/www.conf && \
@@ -45,6 +45,7 @@ RUN sed -i "s/;date.timezone =.*/date.timezone = UTC/" /etc/php/7.1/fpm/php.ini 
 ENV XDEBUG_REMOTE_HOST localhost
 ENV XDEBUG_REMOTE_KEY docker
 ENV XDEBUG_REMOTE_PORT 9000
+ENV VIRTUAL_HOST localhost
 
 RUN echo "xdebug.max_nesting_level = 1024" >> /etc/php/7.1/mods-available/xdebug.ini
 RUN echo "xdebug.remote_enable=1" >> /etc/php/7.1/mods-available/xdebug.ini
